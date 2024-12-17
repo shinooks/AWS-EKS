@@ -1,0 +1,52 @@
+# openldap-psv-deployment.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ldap-pv
+  namespace: ldap
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/ldap
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ldap-config-pv
+  namespace: ldap
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/ldap-config"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ldap-data-pvc
+  namespace: ldap
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ldap-config-pvc
+  namespace: ldap
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
